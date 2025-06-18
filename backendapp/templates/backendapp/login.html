@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            background-color: #185a9d;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #114077;
+        }
+        .registro-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .registro-link a {
+            color: #185a9d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .registro-link a:hover {
+            text-decoration: underline;
+        }
+        #mensaje {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Iniciar sesión</h2>
+        <form id="loginForm">
+            <input type="email" id="username" placeholder="Correo electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+        </form>
+        <div class="registro-link">
+            ¿No tienes cuenta? <a href="{% url 'registro' %}">Crear cuenta</a>
+        </div>
+        <div id="mensaje"></div>
+    </div>
+
+    <script>
+        const supabase = window.supabase.createClient(
+            'https://xtckolxiipfxnstcbofm.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0Y2tvbHhpaXBmeG5zdGNib2ZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDUwMjk3NzgsImV4cCI6MjA2MDYwNTc3OH0.Ey7NfufULbDx7QxlcPcqNg46k6LnsAsA_6HMk7f8CsE'
+        );
+
+        const form = document.getElementById('loginForm');
+        const mensaje = document.getElementById('mensaje');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                mensaje.innerText = 'Error: ' + error.message;
+                mensaje.style.color = 'red';
+            } else {
+                mensaje.innerText = 'Login exitoso. Redirigiendo...';
+                mensaje.style.color = 'green';
+                setTimeout(() => {
+                window.location.href = 'home.html';
+            }, 1000);
+}
+
+        });
+    </script>
+</body>
+</html>

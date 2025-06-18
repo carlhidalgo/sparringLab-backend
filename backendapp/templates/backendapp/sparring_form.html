@@ -1,0 +1,96 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f8fa;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
+  .messages li {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .error { background-color: #f8d7da; color: #721c24; }
+  .success { background-color: #d4edda; color: #155724; }
+
+  form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+  }
+
+  form input[type="text"],
+  form input[type="date"],
+  form input[type="time"],
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  form button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  form button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="requester">Your Boxer ID:</label>
+    <input type="text" name="requester" required>
+
+    <label for="opponent">Opponent Boxer ID:</label>
+    <input type="text" name="opponent" required>
+
+    <label for="gym">Gym ID:</label>
+    <input type="text" name="gym">
+
+    <label for="date">Date:</label>
+    <input type="date" name="date" required>
+
+    <label for="time">Time:</label>
+    <input type="time" name="time" required>
+
+    <label for="notes">Notes:</label>
+    <textarea name="notes" rows="4"></textarea>
+
+    <button type="submit">Reserve</button>
+</form>

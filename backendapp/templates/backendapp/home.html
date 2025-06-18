@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SparringLab</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background:rgba(255, 255, 255, 0.5);
+            color: #000000;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 80px auto;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #000000;
+        }
+        a {
+            display: block;
+            margin: 12px 0;
+            padding: 12px 20px;
+            text-decoration: none;
+            background-color: #a3a3a3;
+            color: rgb(0, 0, 0);
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #0a0056;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 30px 16px;
+                padding: 25px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+            a {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SparringLab</h1>
+        <a href="{% url 'gym_list' %}">Ver lista de gimnasios</a>
+        <a href="{% url 'boxer_list' %}">Ver lista de boxeadores</a>
+        <a href="{% url 'boxer_create' %}">Registrarme</a>
+        <a href="{% url 'calendar' %}">Calendario</a>
+        <a href="{% url 'sparring_reserve' %}">Agendar</a>
+    </div>
+</body>
+</html>
+

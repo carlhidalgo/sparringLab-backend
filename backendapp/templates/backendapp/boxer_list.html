@@ -1,0 +1,26 @@
+<div background-color: lightblue;>
+<h1>Boxer List</h1>
+
+<div style="margin-bottom: 1rem;">
+  <a href="{% url 'boxer_create' %}" style="text-decoration: none; background: #007bff; color: white; padding: 8px 12px; border-radius: 4px;">+ Add Boxer</a>
+</div>
+
+<ul style="list-style: none; padding: 0;">
+  {% for boxer in boxers %}
+    <li style="padding: 10px; border: 1px solid #ddd; margin-bottom: 8px; border-radius: 6px;">
+      <strong>{{ boxer.first_name }} {{ boxer.last_name }}</strong> —
+      <em>{{ boxer.weight_class }} kg / {{ boxer.weight_lbs }} lbs</em>
+      <div style="margin-top: 6px;">
+        <a href="{% url 'boxer_update' boxer.id %}" style="margin-right: 10px; color: #007bff;">Edit</a>
+        <a href="{% url 'boxer_delete' boxer.id %}" style="color: #dc3545;">Delete</a>
+      </div>
+    </li>
+  {% empty %}
+    <li>No boxers found.</li>
+  {% endfor %}
+</ul>
+</div>
+
+<style>
+  
+</style>
