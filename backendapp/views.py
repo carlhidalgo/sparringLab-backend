@@ -477,11 +477,11 @@ def api_reservar_ring(request):
             if not oponente.data:
                 return JsonResponse({'error': 'El email del oponente no está registrado'}, status=404)
 
-            conflictos = supabase.table("reservas").select("*") \
-            .eq("fecha", fecha) \
-            .eq("ring_id", ring_id) \
-            .filter("hora_inicio", "<", hora_fin) \
-            .filter("hora_fin", ">", hora_inicio) \
+            conflictos = supabase.table("reservas").select("*")\
+            .eq("fecha", fecha)\
+            .eq("ring_id", ring_id)\
+            .lt("hora_inicio", hora_fin)\
+            .gt("hora_fin", hora_inicio)\
             .execute()
         if conflictos.data:
             return JsonResponse({'error': 'El ring ya está reservado en ese horario'}, status=409)
