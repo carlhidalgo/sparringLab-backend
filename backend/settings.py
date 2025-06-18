@@ -96,7 +96,8 @@ TEMPLATES = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Frontend (React)
+    'http://localhost:3000',
+    'https://sparring-lab-fronted.vercel.app/'  # Frontend (React)
 ]
 
 # Permite el uso de credenciales (cookies o JWT)
